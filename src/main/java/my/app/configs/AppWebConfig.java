@@ -1,8 +1,10 @@
 package my.app.configs;
 
+import my.app.converters.StringToRoleConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -36,7 +38,7 @@ public class AppWebConfig implements WebMvcConfigurer {
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 
-        templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.setTemplateResolver(applicationContext.getBean(SpringResourceTemplateResolver.class));
         templateEngine.setEnableSpringELCompiler(true);
 
         return templateEngine;
@@ -46,7 +48,12 @@ public class AppWebConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
 
-        resolver.setTemplateEngine(templateEngine());
+        resolver.setTemplateEngine(applicationContext.getBean(SpringTemplateEngine.class));
         registry.viewResolver(resolver);
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverter(applicationContext.getBean(StringToRoleConverter.class));
     }
 }

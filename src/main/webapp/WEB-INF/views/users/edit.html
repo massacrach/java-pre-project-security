@@ -1,10 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Edit User</title>
 
-</body>
+        <style>
+            .error {
+                color: red;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h2>Edit User</h2>
+
+        <hr />
+
+        <form
+            th:method="PATCH"
+            th:action="@{/admin/users/{id}(id=${user.getId()})}"
+            th:object="${user}">
+
+            <label for="username">Username</label>
+            <input type="text" name="username" th:field="*{username}" />
+
+            <div
+                    class="error"
+                    th:if="${#fields.hasErrors('username')}"
+                    th:errors="*{username}" />
+
+            <div
+                    class="error"
+                    th:if="${usernameError}"
+                    th:text="${usernameErrorText}" />
+
+            <hr />
+
+            <label for="email">Email</label>
+            <input type="text" name="email" th:field="*{email}" />
+
+            <div
+                    class="error"
+                    th:if="${#fields.hasErrors('email')}"
+                    th:errors="*{email}" />
+
+            <hr />
+
+            <label for="password">Password</label>
+            <input type="password" name="password" th:value="*{password}" />
+
+            <div
+                    class="error"
+                    th:if="${#fields.hasErrors('password')}"
+                    th:errors="*{password}" />
+
+            <hr />
+
+            <label for="roles">Roles</label>
+
+            <select
+                    id="roles"
+                    multiple="multiple"
+                    name="roles[]"
+                    th:field="*{roles}">
+
+                    <option th:each="role : ${all_roles}"
+                            th:value="${role.id}"
+                            th:selected="${user.roles.contains(role)}"
+                            th:text="${role.description}" />
+            </select>
+
+            <hr />
+
+            <input type="submit" value="Update" />
+        </form>
+    </body>
 </html>

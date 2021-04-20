@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Create User</title>
+
+        <style>
+            .error {
+                color: red;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h2>Create User</h2>
+
+        <hr />
+
+        <form
+            th:method="POST"
+            th:action="@{/admin/users}"
+            th:object="${user}">
+
+            <label for="username">Username</label>
+            <input type="text" name="username" th:field="*{username}" />
+
+            <div
+                    class="error"
+                    th:if="${#fields.hasErrors('username')}"
+                    th:errors="*{username}" />
+
+            <div
+                    class="error"
+                    th:if="${usernameError}"
+                    th:text="${usernameErrorText}" />
+
+            <hr />
+
+            <label for="email">Email</label>
+            <input type="text" name="email" th:field="*{email}" />
+
+            <div
+                    class="error"
+                    th:if="${#fields.hasErrors('email')}"
+                    th:errors="*{email}" />
+
+            <hr />
+
+            <label for="password">Password</label>
+            <input type="password" name="password" th:field="*{password}" />
+
+            <div
+                    class="error"
+                    th:if="${#fields.hasErrors('password')}"
+                    th:errors="*{password}" />
+
+            <hr />
+
+            <label for="roles">Roles</label>
+
+            <select
+                    id="roles"
+                    multiple="multiple"
+                    name="roles[]"
+                    th:field="*{roles}">
+
+                    <option th:each="role : ${all_roles}"
+                            th:value="${role.id}"
+                            th:text="${role.description}" />
+            </select>
+
+            <hr />
+
+            <input type="submit" value="Create" />
+        </form>
+    </body>
+</html>

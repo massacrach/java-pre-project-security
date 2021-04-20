@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private UserDao userDao;
+    private final UserDao userDao;
 
     @Autowired
     public UserServiceImpl(@Qualifier("entityManagerImplementation") UserDao userDao) {
@@ -41,5 +41,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         userDao.delete(id);
+    }
+
+    @Override
+    public Optional<User> getUserByUsername(String username) {
+        return userDao.getUserByUsername(username);
     }
 }
