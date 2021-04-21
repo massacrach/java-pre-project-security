@@ -1,5 +1,6 @@
-package my.app.services;
+package my.app.security;
 
+import my.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public List<User> list() {
         return userDao.list();
     }
@@ -29,21 +31,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void create(User user) {
         userDao.create(user);
     }
 
     @Override
+    @Transactional
     public void update(User user, Long id) {
         userDao.update(user, id);
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         userDao.delete(id);
     }
 
     @Override
+    @Transactional
     public Optional<User> getUserByUsername(String username) {
         return userDao.getUserByUsername(username);
     }

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository("entityManagerImplementation")
-@Transactional
 public class UserDaoEntityManagerImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
@@ -17,7 +16,7 @@ public class UserDaoEntityManagerImpl implements UserDao {
     @Override
     public List<User> list() {
         return entityManager
-                .createQuery("Select user from User user", User.class)
+                .createQuery("Select user from User user join fetch user.roles", User.class)
                 .getResultList();
     }
 
@@ -51,7 +50,7 @@ public class UserDaoEntityManagerImpl implements UserDao {
     @Override
     public Optional<User> getUserByUsername(String username) {
         TypedQuery<User> query = entityManager
-                .createQuery("select u from User u where u.username = :username",
+                .createQuery("select u from User u join fetch u.roles where u.username = :username",
                 User.class);
         query.setParameter("username", username);
         User user = null;

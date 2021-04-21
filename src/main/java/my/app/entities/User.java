@@ -36,7 +36,7 @@ public class User implements UserDetails {
     @Size(min = 3, max = 50, message = "Password length must be between 3 and 50 characters")
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
