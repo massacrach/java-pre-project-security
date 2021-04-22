@@ -2,6 +2,7 @@ package my.app.configs;
 
 import my.app.security.SuccessUserHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -21,7 +22,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public AppSecurityConfig(PasswordEncoder passwordEncoder,
-                             UserDetailsService userDetailsService,
+                             @Qualifier("UserDetailsServiceImpl") UserDetailsService userDetailsService,
                              SuccessUserHandler successUserHandler) {
 
         this.passwordEncoder = passwordEncoder;

@@ -4,6 +4,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.4.3</version>
+  </parent>
+
   <groupId>my.app</groupId>
   <artifactId>JM_Security_task</artifactId>
   <version>1.0-SNAPSHOT</version>
@@ -22,7 +28,11 @@
   </properties>
 
   <dependencies>
-    <!-- DATABASE RELATED DEPENDENCIES -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -51,46 +61,33 @@
       <version>8.0.23</version>
     </dependency>
 
-    <!-- SECURITY RELATED DEPENDENCIES -->
-    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
     <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-web</artifactId>
-      <version>${spring.version}</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
     <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-config</artifactId>
-      <version>${spring.version}</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- TEMPLATE ENGINE RELATED DEPENDENCIES -->
-    <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5 -->
     <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf-spring5</artifactId>
-      <version>3.0.12.RELEASE</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
 
-    <!-- WEB RELATED DEPENDENCIES -->
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>${spring.version}</version>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>4.0.1</version>
-      <scope>provided</scope>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>runtime</scope>
+      <optional>true</optional>
     </dependency>
 
-    <!-- OTHER DEPENDENCIES -->
     <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -111,6 +108,11 @@
     <finalName>JM_Security_task</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
