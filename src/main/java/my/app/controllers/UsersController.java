@@ -4,6 +4,7 @@ import my.app.entities.User;
 import my.app.services.RoleService;
 import my.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +20,8 @@ public class UsersController {
     private final RoleService roleService;
 
     @Autowired
-    public UsersController(UserService userService, RoleService roleService) {
+    public UsersController(@Qualifier("UserServiceJpaImpl") UserService userService,
+                           @Qualifier("RoleServiceJpaImpl") RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
@@ -71,7 +73,7 @@ public class UsersController {
     public String edit(@PathVariable Long id, Model model) {
         Optional<User> user = userService.get(id);
 
-        if (!user.isPresent()) {
+        if (user.isEmpty()) {
             return "redirect:/admin/users";
         }
 

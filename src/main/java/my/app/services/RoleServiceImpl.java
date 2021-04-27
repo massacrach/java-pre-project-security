@@ -5,8 +5,9 @@ import my.app.repositories.RoleDao;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
+@Service("RoleServiceEntityManagerImpl")
 public class RoleServiceImpl implements RoleService {
     private final RoleDao roleDao;
 
@@ -20,7 +21,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role get(Long id) {
+    public Optional<Role> get(Long id) {
         return this.roleDao.get(id);
     }
 }

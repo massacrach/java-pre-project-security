@@ -1,11 +1,13 @@
 package my.app.repositories;
 
 import my.app.entities.Role;
+import my.app.entities.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class RoleDaoImpl implements RoleDao {
@@ -20,7 +22,9 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
-    public Role get(Long id) {
-        return entityManager.find(Role.class, id);
+    public Optional<Role> get(Long id) {
+        Role role = entityManager.find(Role.class, id);
+
+        return Optional.of(role);
     }
 }

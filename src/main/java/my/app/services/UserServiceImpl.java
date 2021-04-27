@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service("UserServiceEntityManagerImpl")
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
 
